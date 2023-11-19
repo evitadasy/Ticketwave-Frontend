@@ -1,4 +1,4 @@
-package com.example.bookify_frontend.ui
+package com.example.bookify_frontend.ui.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
