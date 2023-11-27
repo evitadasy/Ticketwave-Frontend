@@ -12,6 +12,19 @@ data class ButtonItem(val imageResourceId: Int, val buttonText: String)
 
 class ButtonAdapter(private val buttonList: List<ButtonItem>) :
     RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder>() {
+    private lateinit var mListener: onItemClickListener
+
+
+
+    interface onItemClickListener{
+        fun onItemClick (position: Int)
+
+
+    }
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener = listener
+
+    }
 
 
 
@@ -20,23 +33,31 @@ class ButtonAdapter(private val buttonList: List<ButtonItem>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ButtonViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_button, parent, false)
-        return ButtonViewHolder(itemView)
+        return ButtonViewHolder(itemView,mListener)
     }
 
     override fun onBindViewHolder(holder: ButtonViewHolder, position: Int) {
         val buttonItem = buttonList[position]
         holder.imageButton.setImageResource(buttonItem.imageResourceId)
         holder.buttonText.text = buttonItem.buttonText
+
+
     }
+
 
     override fun getItemCount(): Int {
         return buttonList.size
     }
 
-    inner class ButtonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ButtonViewHolder(itemView: View,listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val imageButton: ImageView = itemView.findViewById(R.id.imageButton)
         val buttonText: TextView = itemView.findViewById(R.id.buttonText)
+        init {
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
+            }
 
+        }
 
     }
 }
