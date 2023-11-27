@@ -50,7 +50,7 @@ class HomeActivity : AppCompatActivity() {
                 call: Call<EventsResponse?>,
                 response: Response<EventsResponse?>
             ) {
-                Toast.makeText(this@HomeActivity, "GOOD", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@HomeActivity, "GOOD", Toast.LENGTH_SHORT).show()
                 val eventsResponse = response.body()
 
                 if (eventsResponse != null) {
