@@ -4,5 +4,5 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 
 data class EventsResponse(
-    val events: JsonArray
+    val events: List<Event>
 )

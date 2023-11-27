@@ -7,7 +7,13 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.bookify_frontend.R
 import com.example.bookify_frontend.api_service.ApiService
+import com.example.bookify_frontend.model.Event
 import com.example.bookify_frontend.model.EventsResponse
+import com.squareup.picasso.Picasso
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
+import com.squareup.picasso.Target
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,20 +52,14 @@ class HomeActivity : AppCompatActivity() {
             ) {
                 Toast.makeText(this@HomeActivity, "GOOD", Toast.LENGTH_SHORT).show()
                 val eventsResponse = response.body()
-                if (eventsResponse != null) {
-                    val eventsArray = eventsResponse.events
-                    for (eventElement in eventsArray) {
-                        val eventObject = eventElement.asJsonObject
-                        // Extract properties from the eventObject
-                        val eventId = eventObject.get("_id").asString
-                        val eventType = eventObject.get("type").asString
-                        Toast.makeText(this@HomeActivity, eventId+eventType, Toast.LENGTH_SHORT).show()
 
-                        // Extract other properties...
-                        // Create an Event object or process the data as needed
-                    }
-                }
-            }
+                if (eventsResponse != null) {
+                    val eventsList = eventsResponse.events
+                    // Handle the list of events as needed
+                    displayEvents(eventsList)
+                } else {
+                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
+                }            }
 
             override fun onFailure(call: Call<EventsResponse?>, t: Throwable) {
                 val errorMessage = t.message
@@ -67,5 +67,45 @@ class HomeActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    private fun displayEvents(eventsList: List<Event>) {
+        // Assuming you have a TextView in your layout with id 'textView'
+        val textView = findViewById<TextView>(R.id.textView)
+
+        // Create a StringBuilder to build the display text
+        val displayText = StringBuilder()
+
+        for (event in eventsList) {
+            // Append event details to the display text
+            displayText.append("Event Title: ${event.title}\n")
+            displayText.append("Event Date: ${event.date}\n")
+            displayText.append("Description: ${event.description}\n")
+
+//            // Load and display the image using Picasso
+//            event.img?.let {
+//                Picasso.get().load(it).into(object : Target {
+//                    override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+//                        // Assuming you have an ImageView in your layout with id 'imageView'
+//                        val imageView = findViewById<ImageView>(R.id.imageView)
+//                        imageView.setImageBitmap(bitmap)
+//                    }
+//
+//                    override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+//                        // Handle the case where image loading fails
+//                    }
+//
+//                    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+//                        // Handle the case where the image is still loading
+//                    }
+//                })
+//            }
+
+            displayText.append("\n\n")
+
+        }
+
+        // Set the display text in the TextView
+        textView.text = displayText.toString()
     }
 }
