@@ -1,18 +1,27 @@
 package com.example.bookify_frontend.model
 
-import java.sql.Date
+import com.google.gson.annotations.SerializedName
 
 
-////////////TSEKARE DATE
-data class Event (
-    val id: String,
-    val title: String,
-    val description: String,
-    val date: Date,
-    val price: Number,
-    val city: String,
-    val location: String,
-    val img: String,
-    val tickets: Number
+data class Event(
+    @SerializedName("_id")
+    val _id: String?,
+    @SerializedName("city")
+    val city: String?,
+    @SerializedName("date")
+    val date: String?,
+    @SerializedName("description")
+    val description: String?,
+    @SerializedName("img")
+    val img: String?,
+    @SerializedName("location")
+    val location: String?,
+    @SerializedName("price")
+    val price: Int?,
+    @SerializedName("tickets")
+    val tickets: Int?,
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("type")
+    val type: String?
 )
-
