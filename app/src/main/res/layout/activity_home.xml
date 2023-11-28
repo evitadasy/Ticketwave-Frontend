@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
         android:id="@+id/headerImageView"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="98dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/header" />
-
+        android:layout_marginTop="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/logo" />
 
     <SearchView
         android:id="@+id/searchView"
