@@ -1,14 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.booking.BookingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/burger"
+        android:layout_width="match_parent"
+        android:layout_height="356.4dp"
+        android:layout_weight="4"
+        android:scaleType="fitXY"
+        android:src="@drawable/burger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="180dp"
+        android:layout_height="54dp"
+        android:text="BOOK NOW"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/burger"
+        app:layout_constraintVertical_bias="0.965" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="126dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="257dp"
+        android:text="Burger Festival"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/burger" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="271dp"
+        android:text="Event Details"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="261dp"
+        android:text="Pricing Details"
+        android:textSize="18sp"
+
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="322dp"
+        android:layout_height="166dp"
+        android:layout_marginBottom="124dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        android:textColor="#8A8A8A"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="57dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="25dp"
+        android:layout_height="21dp"
+        android:src="@drawable/calendar"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="448dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="25dp"
+        android:layout_height="19dp"
+        android:src="@drawable/clock"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="477dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="25dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/location"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        tools:layout_editor_absoluteY="418dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="284dp"
+        android:layout_height="19dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="418dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="283dp"
+        android:layout_height="21dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="448dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="282dp"
+        android:layout_height="19dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="477dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
