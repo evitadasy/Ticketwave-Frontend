@@ -9,30 +9,24 @@ import com.example.bookify_frontend.R
 import com.example.bookify_frontend.api_service.ApiService
 import com.example.bookify_frontend.model.Event
 import com.example.bookify_frontend.model.EventsResponse
-import com.squareup.picasso.Picasso
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.squareup.picasso.Target
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import android.database.Cursor
 import android.database.MatrixCursor
 import android.provider.BaseColumns
-import android.widget.ArrayAdapter
 import com.example.bookify_frontend.model.SuggestionsAdapter
 
 
 lateinit var basetext: TextView
 lateinit var btn: Button
-private val searchSuggestions = ArrayList<String>()
+private val searchSuggestions = arrayListOf<String>()
 
 const val URL = "http://192.168.1.83:3000/"
 
@@ -115,13 +109,20 @@ class HomeActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 // Filter suggestions based on the entered text
-                suggestionAdapter.filter.filter(newText)
+                val filteredSuggestions = searchSuggestions.filter {
+                    it.startsWith(newText.orEmpty(), ignoreCase = true)
+                }
+
+                // Update the cursor with the filtered suggestions
+                val cursor = createCursor(filteredSuggestions)
+                suggestionAdapter.changeCursor(cursor)
+
                 return true
             }
         })
     }
 
-    private fun createCursor(suggestions: ArrayList<String>): MatrixCursor {
+    private fun createCursor(suggestions: List<String>): MatrixCursor {
         val cursor = MatrixCursor(arrayOf(BaseColumns._ID, "suggestion"))
         for ((index, suggestion) in suggestions.withIndex()) {
             cursor.addRow(arrayOf(index, suggestion))
@@ -131,11 +132,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initSearchSuggestions() {
         // TODO: Fetch search suggestions from your API and add them to searchSuggestions list
-        // For now, let's add some dummy data
-        searchSuggestions.add("Event1")
-        searchSuggestions.add("Event2")
-        searchSuggestions.add("Event3")
-        searchSuggestions.add("Event4")
+        // For now some dummy data
+        searchSuggestions.add("Thessaloniki")
+        searchSuggestions.add("Larissa")
+        searchSuggestions.add("Bolos")
+        searchSuggestions.add("Athens")
     }
 
 
