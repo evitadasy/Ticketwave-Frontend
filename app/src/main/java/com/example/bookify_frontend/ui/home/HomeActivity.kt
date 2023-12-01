@@ -9,22 +9,24 @@ import com.example.bookify_frontend.R
 import com.example.bookify_frontend.api_service.ApiService
 import com.example.bookify_frontend.model.Event
 import com.example.bookify_frontend.model.EventsResponse
-import com.squareup.picasso.Picasso
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Target
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import android.database.MatrixCursor
+import android.provider.BaseColumns
+import com.example.bookify_frontend.model.SuggestionsAdapter
+
 
 lateinit var basetext: TextView
 lateinit var btn: Button
+private val searchSuggestions = arrayListOf<String>()
 
 const val URL = "http://192.168.1.83:3000/"
 
@@ -62,9 +64,9 @@ class HomeActivity : AppCompatActivity() {
         // Initialize το adapter with click listener
         val adapter = ButtonAdapter(buttonItemList)
         recyclerView.adapter = adapter
-        adapter.setOnItemClickListener(object:ButtonAdapter.onItemClickListener{
+        adapter.setOnItemClickListener(object : ButtonAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                Toast.makeText(this@HomeActivity,"Hello$position", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@HomeActivity, "Hello$position", Toast.LENGTH_SHORT).show()
 
                 // edw anti gia toast ena val intend
                 // paradeigma --->
@@ -85,7 +87,62 @@ class HomeActivity : AppCompatActivity() {
         )
         val randomIndex = (0 until searchHints.size).random()
         searchView.queryHint = searchHints[randomIndex]
+
+        // edw ksekinaei to search suggestion apo API
+
+
+        initSearchSuggestions()
+
+        // Create and set the custom adapter for the SearchView
+        val suggestionAdapter = SuggestionsAdapter(
+            this,
+            createCursor(searchSuggestions),
+            false
+        )
+        searchView.suggestionsAdapter = suggestionAdapter
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Handle query submission if needed
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Filter suggestions based on the entered text
+                val filteredSuggestions = searchSuggestions.filter {
+                    it.startsWith(newText.orEmpty(), ignoreCase = true)
+                }
+
+                // Update the cursor with the filtered suggestions
+                val cursor = createCursor(filteredSuggestions)
+                suggestionAdapter.changeCursor(cursor)
+
+                return true
+            }
+        })
     }
+
+    private fun createCursor(suggestions: List<String>): MatrixCursor {
+        val cursor = MatrixCursor(arrayOf(BaseColumns._ID, "suggestion"))
+        for ((index, suggestion) in suggestions.withIndex()) {
+            cursor.addRow(arrayOf(index, suggestion))
+        }
+        return cursor
+    }
+
+    private fun initSearchSuggestions() {
+        // TODO: Fetch search suggestions from your API and add them to searchSuggestions list
+        // For now some dummy data
+        searchSuggestions.add("Thessaloniki")
+        searchSuggestions.add("Larissa")
+        searchSuggestions.add("Bolos")
+        searchSuggestions.add("Athens")
+    }
+
+
+
+
+
 
     private fun getData() {
         val retrofit = Retrofit.Builder()
