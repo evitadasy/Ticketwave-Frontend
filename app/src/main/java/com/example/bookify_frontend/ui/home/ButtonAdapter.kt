@@ -27,9 +27,6 @@ class ButtonAdapter(private val buttonList: List<ButtonItem>) :
     }
 
 
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ButtonViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_button, parent, false)

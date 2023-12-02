@@ -16,6 +16,8 @@ import android.widget.ImageView
 import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookify_frontend.api_service.RetrofitService
+import com.example.bookify_frontend.model.CitiesResponse
 import com.squareup.picasso.Target
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +28,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 lateinit var basetext: TextView
 lateinit var btn: Button
 
-const val URL = "https://bookify-zm4t.onrender.com/"
 
 class HomeActivity : AppCompatActivity() {
 
@@ -48,10 +49,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-//        basetext= findViewById(R.id.buttonText)
-//        btn = findViewById(R.id.imageButton)
-//
-//        btn.setOnClickListener { getData() }
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
@@ -64,7 +61,11 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(object:ButtonAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
+
                 Toast.makeText(this@HomeActivity,"Hello$position", Toast.LENGTH_SHORT).show()
+
+                getData()
+
 
                 // edw anti gia toast ena val intend
                 // paradeigma --->
@@ -88,35 +89,47 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        val retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(URL)
-            .build()
+        val apiService = RetrofitService.createApiService()
 
-        val retrofitAPI = retrofit.create(ApiService::class.java).getEvents()
+        val eventsCall = apiService.getEvents()
+//        val eventsByTypeCall = apiService.getEventsByType()
+        val citiesCall = apiService.getCities()
 
-        retrofitAPI.enqueue(object : Callback<EventsResponse?> {
+        citiesCall.enqueue(object : Callback<CitiesResponse?> {
+            override fun onResponse(
+                call: Call<CitiesResponse?>,
+                response: Response<CitiesResponse?>
+            ) {
+                Toast.makeText(this@HomeActivity, "Cities: Fetched!", Toast.LENGTH_SHORT).show()
+                //handle cities
+            }
+
+            override fun onFailure(call: Call<CitiesResponse?>, t: Throwable) {
+                val errorMessage = t.message
+                Toast.makeText(this@HomeActivity, "Cities Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
+        })
+
+        eventsCall.enqueue(object : Callback<EventsResponse?> {
             override fun onResponse(
                 call: Call<EventsResponse?>,
                 response: Response<EventsResponse?>
             ) {
-//                Toast.makeText(this@HomeActivity, "GOOD", Toast.LENGTH_SHORT).show()
-                val eventsResponse = response.body()
-
-                if (eventsResponse != null) {
-                    val eventsList = eventsResponse.events
-                    // Handle the list of events as needed
-                    displayEvents(eventsList)
-                } else {
-                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
-                }            }
+                Toast.makeText(this@HomeActivity, "Events: Fetched!", Toast.LENGTH_SHORT).show()
+//                val eventsResponse = response.body()
+//
+//                if (eventsResponse != null) {
+//   //                 val eventsList = eventsResponse
+////                    // Handle the list of events as needed
+////                    displayEvents(eventsList)
+//                } else {
+//                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
+//                }
+            }
 
             override fun onFailure(call: Call<EventsResponse?>, t: Throwable) {
                 val errorMessage = t.message
-                Toast.makeText(this@HomeActivity, "Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
+                Toast.makeText(this@HomeActivity, "Events Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
         })
-
-
     }
 
     private fun displayEvents(eventsList: List<Event>) {
