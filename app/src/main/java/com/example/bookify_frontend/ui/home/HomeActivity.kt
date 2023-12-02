@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 lateinit var basetext: TextView
 lateinit var btn: Button
 
-const val URL = "https://bookify-zm4t.onrender.com/"
+const val URL = "http://192.168.1.83:3000/"
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
