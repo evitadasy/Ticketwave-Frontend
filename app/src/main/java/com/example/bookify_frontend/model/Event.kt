@@ -23,5 +23,7 @@ data class Event(
     @SerializedName("title")
     val title: String?,
     @SerializedName("type")
-    val type: String?
+    val type: String?,
+    @SerializedName("category")
+    val category: String?
 )

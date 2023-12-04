@@ -17,7 +17,6 @@ class CategoryActivity : AppCompatActivity() {
 
     data class CategoryItem(val imageUrl: String, val title: String, val description: String)
 
-
     private val categoryItemList = mutableListOf<CategoryItem>()
     private lateinit var categoryAdapter: CategoryAdapter
 
@@ -30,30 +29,60 @@ class CategoryActivity : AppCompatActivity() {
         categoryAdapter = CategoryAdapter(categoryItemList)
         recyclerView.adapter = categoryAdapter
 
-        // Make an API call to fetch data
-        fetchDataFromApi()
+        // Get the selected category position from intent
+        val categoryPosition = intent.getIntExtra("CATEGORY_POSITION", -1)
+
+        if (categoryPosition != -1) {
+            // Make an API call to fetch data for the selected category
+            fetchDataForCategory(categoryPosition)
+        } else {
+            // Handle error or default behavior
+        }
     }
 
-    private fun fetchDataFromApi() {
-        // Adjust the URL and API call based on your actual API endpoint and structure
+    private fun fetchDataForCategory(categoryPosition: Int) {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("YOUR_API_BASE_URL")
+            .baseUrl("http://192.168.1.83:3000/")
             .build()
 
         val retrofitAPI = retrofit.create(ApiService::class.java).getEvents()
 
         retrofitAPI.enqueue(object : Callback<EventsResponse?> {
-            override fun onResponse(call: Call<EventsResponse?>, response: Response<EventsResponse?>) {
+            override fun onResponse(
+                call: Call<EventsResponse?>,
+                response: Response<EventsResponse?>
+            ) {
                 val eventsResponse = response.body()
 
                 if (eventsResponse != null) {
                     val eventsList = eventsResponse.events
 
-                    // edw allazoume ti list na fainetai sto recyclerview.
+                    // Filter events based on the selected category
+                    val filteredEvents = when (categoryPosition) {
+                        0 -> eventsList.filter { it.category == "Cinema" }
+                        1 -> eventsList.filter { it.category == "Concert" }
+                        2 -> eventsList.filter { it.category == "Food" }
+                        3 -> eventsList.filter { it.category == "Sports"  }
+                        4 -> eventsList.filter { it.category == "Seminar"}
+                        5 -> eventsList.filter { it.category == "Theatre" }
+                        6 -> eventsList.filter { it.category == "Kids"  }
+                        7 -> eventsList.filter { it.category == "Museums" }
+
+                        // Add more cases for other categories
+                        else -> emptyList()
+                    }
+
+                    // Update the categoryItemList and notify adapter
                     categoryItemList.clear()
-                    for (event in eventsList) {
-                        categoryItemList.add(CategoryItem(event.img ?: "", event.title ?: "", event.description ?: ""))
+                    for (event in filteredEvents) {
+                        categoryItemList.add(
+                            CategoryItem(
+                                event.img ?: "",
+                                event.title ?: "",
+                                event.description ?: ""
+                            )
+                        )
                     }
                     categoryAdapter.notifyDataSetChanged()
                 }
