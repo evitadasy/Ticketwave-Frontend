@@ -13,7 +13,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class CategoryActivity : AppCompatActivity() {
 
     data class CategoryItem(val imageUrl: String, val title: String, val description: String)
@@ -54,7 +53,7 @@ class CategoryActivity : AppCompatActivity() {
                     // edw allazoume ti list na fainetai sto recyclerview.
                     categoryItemList.clear()
                     for (event in eventsList) {
-                        categoryItemList.add(CategoryItem(event.img ?: "", event.title, event.description))
+                        categoryItemList.add(CategoryItem(event.img ?: "", event.title ?: "", event.description ?: ""))
                     }
                     categoryAdapter.notifyDataSetChanged()
                 }
