@@ -5,5 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.category.CategoryActivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-3dp"
+        android:layout_marginBottom="0dp"
+        android:paddingTop="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
