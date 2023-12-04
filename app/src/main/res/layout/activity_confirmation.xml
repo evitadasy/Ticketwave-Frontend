@@ -4,6 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/confirm_bg"
     tools:context=".ui.confirmation.ConfirmationActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/hand" />
+
+    <TextView
+        android:id="@+id/tvConfirmationMessage"
+        android:layout_width="226dp"
+        android:layout_height="91dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="CONGRATULATIONS YOUR BOOKING IS CONFIRMED!"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="178dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/tvConfirmationMessage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:backgroundTint="#4F4F4F"
+        android:fontFamily="@font/roboto_bold"
+        android:text="EXIT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvConfirmationMessage" />
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="178dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/btnExit"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#3033D6"
+        android:fontFamily="@font/roboto_bold"
+        android:text="CONTINUE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnExit"
+        app:layout_constraintVertical_bias="0.243" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
