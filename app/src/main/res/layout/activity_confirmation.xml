@@ -20,14 +20,16 @@
     <TextView
         android:id="@+id/tvConfirmationMessage"
         android:layout_width="226dp"
-        android:layout_height="91dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/roboto_medium"
         android:gravity="center_horizontal|center_vertical"
         android:text="CONGRATULATIONS YOUR BOOKING IS CONFIRMED!"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnExit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -38,12 +40,12 @@
         android:layout_height="48dp"
         android:layout_below="@+id/tvConfirmationMessage"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
         android:backgroundTint="#4F4F4F"
         android:fontFamily="@font/roboto_bold"
         android:text="EXIT"
+        app:layout_constraintBottom_toTopOf="@+id/btnContinue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvConfirmationMessage" />
 
@@ -58,7 +60,7 @@
         android:text="CONTINUE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnExit"
         app:layout_constraintVertical_bias="0.243" />

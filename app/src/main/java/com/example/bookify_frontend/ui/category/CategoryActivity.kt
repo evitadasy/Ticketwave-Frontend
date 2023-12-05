@@ -57,7 +57,7 @@ class CategoryActivity : AppCompatActivity() {
                 val eventsResponse = response.body()
 
                 if (eventsResponse != null) {
-                    val eventsList = eventsResponse.events
+                    val eventsList = eventsResponse
 
                     // Filter events based on the selected category
                     val filteredEvents = when (categoryPosition) {

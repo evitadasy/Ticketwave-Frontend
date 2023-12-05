@@ -6,25 +6,17 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.bookify_frontend.R
-import com.example.bookify_frontend.api_service.ApiService
-import com.example.bookify_frontend.model.Event
 import com.example.bookify_frontend.model.EventsResponse
 import android.widget.ImageView
 import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-
-
 import com.example.bookify_frontend.api_service.RetrofitService
 import com.example.bookify_frontend.model.CitiesResponse
 import com.squareup.picasso.Target
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import android.database.MatrixCursor
 import android.provider.BaseColumns
 import com.example.bookify_frontend.model.SuggestionsAdapter
@@ -140,17 +132,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initSearchSuggestions() {
-        // TODO: Fetch search suggestions from your API and add them to searchSuggestions list
         // For now some dummy data
         searchSuggestions.add("Thessaloniki")
         searchSuggestions.add("Larissa")
         searchSuggestions.add("Bolos")
         searchSuggestions.add("Athens")
     }
-
-
-
-
 
 
     private fun getData() {
@@ -167,6 +154,14 @@ class HomeActivity : AppCompatActivity() {
             ) {
                 Toast.makeText(this@HomeActivity, "Cities: Fetched!", Toast.LENGTH_SHORT).show()
                 //handle cities
+                val citiesList = response.body()
+                if (citiesList != null) {
+                    for (city in citiesList) {
+                        Toast.makeText(this@HomeActivity, city.cityName, Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onFailure(call: Call<CitiesResponse?>, t: Throwable) {
@@ -180,15 +175,15 @@ class HomeActivity : AppCompatActivity() {
                 response: Response<EventsResponse?>
             ) {
                 Toast.makeText(this@HomeActivity, "Events: Fetched!", Toast.LENGTH_SHORT).show()
-//                val eventsResponse = response.body()
-//
-//                if (eventsResponse != null) {
-//   //                 val eventsList = eventsResponse
-////                    // Handle the list of events as needed
-////                    displayEvents(eventsList)
-//                } else {
-//                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
-//                }
+                //handle events
+                val eventsList = response.body()
+                if (eventsList != null) {
+                    for (event in eventsList)
+                    Toast.makeText(this@HomeActivity, event.title+" :"+event.description, Toast.LENGTH_SHORT).show()
+
+                } else {
+                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onFailure(call: Call<EventsResponse?>, t: Throwable) {
@@ -197,19 +192,19 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    private fun displayEvents(eventsList: List<Event>) {
-        // Assuming you have a TextView in your layout with id 'textView'
-//        val textView = findViewById<TextView>(R.id.textView)
-
-        // Create a StringBuilder to build the display text
-        val displayText = StringBuilder()
-
-        for (event in eventsList) {
-            // Append event details to the display text
-            displayText.append("Event Title: ${event.title}\n")
-            displayText.append("Event Date: ${event.date}\n")
-            displayText.append("Description: ${event.description}\n")
-
+//    private fun displayEvents(eventsList: List<Event>) {
+//        // Assuming you have a TextView in your layout with id 'textView'
+////        val textView = findViewById<TextView>(R.id.textView)
+//
+//        // Create a StringBuilder to build the display text
+//        val displayText = StringBuilder()
+//
+//        for (event in eventsList) {
+//            // Append event details to the display text
+//            displayText.append("Event Title: ${event.title}\n")
+//            displayText.append("Event Date: ${event.date}\n")
+//            displayText.append("Description: ${event.description}\n")
+//
 //            // Load and display the image using Picasso
 //            event.img?.let {
 //                Picasso.get().load(it).into(object : Target {
@@ -228,12 +223,12 @@ class HomeActivity : AppCompatActivity() {
 //                    }
 //                })
 //            }
-
-            displayText.append("\n\n")
-
-        }
-
-        // Set the display text in the TextView
-//        textView.text = displayText.toString()
-    }
+//
+//            displayText.append("\n\n")
+//
+//        }
+//
+//        // Set the display text in the TextView
+////        textView.text = displayText.toString()
+//    }
 }
