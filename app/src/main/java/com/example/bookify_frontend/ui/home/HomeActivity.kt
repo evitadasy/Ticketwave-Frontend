@@ -178,8 +178,9 @@ class HomeActivity : AppCompatActivity() {
                 //handle events
                 val eventsList = response.body()
                 if (eventsList != null) {
-                    for (event in eventsList)
-                    Toast.makeText(this@HomeActivity, event.title+" :"+event.description, Toast.LENGTH_SHORT).show()
+                    for (event in eventsList) {
+                        Toast.makeText(this@HomeActivity, event.title+" :"+event.description, Toast.LENGTH_SHORT).show()
+                    }
 
                 } else {
                     Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
