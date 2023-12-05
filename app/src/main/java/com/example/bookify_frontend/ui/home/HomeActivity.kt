@@ -1,5 +1,6 @@
 package com.example.bookify_frontend.ui.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -20,6 +21,7 @@ import retrofit2.Response
 import android.database.MatrixCursor
 import android.provider.BaseColumns
 import com.example.bookify_frontend.model.SuggestionsAdapter
+import com.example.bookify_frontend.ui.category.CategoryActivity
 
 
 lateinit var basetext: TextView
@@ -59,23 +61,9 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(object : ButtonAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-
-                Toast.makeText(this@HomeActivity, "Hello$position", Toast.LENGTH_SHORT).show()
-
-
-                Toast.makeText(this@HomeActivity,"Hello$position", Toast.LENGTH_SHORT).show()
+                    navigateToCategory(position)
 
 
-                getData()
-
-
-                // edw anti gia toast ena val intend
-                // paradeigma --->
-                // var selectedCategory = ""
-                //when(position)  {
-                //      0 -> selectedCategory =  "cinema"
-                //       1 -> selectedCategory= "theatro"
-                //}
             }
         })
         // Set up the SearchView
@@ -137,6 +125,11 @@ class HomeActivity : AppCompatActivity() {
         searchSuggestions.add("Larissa")
         searchSuggestions.add("Bolos")
         searchSuggestions.add("Athens")
+    }
+    private fun navigateToCategory(position: Int) {
+        val intent = Intent(this@HomeActivity, CategoryActivity::class.java)
+        intent.putExtra("CATEGORY_POSITION", position)
+        startActivity(intent)
     }
 
 
