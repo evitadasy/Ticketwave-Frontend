@@ -13,13 +13,13 @@ import android.widget.ImageView
 import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-<<<<<<< HEAD
 
-=======
+
+
 import com.example.bookify_frontend.api_service.RetrofitService
 import com.example.bookify_frontend.model.CitiesResponse
 import com.squareup.picasso.Target
->>>>>>> 3ac726951736c86d54026070db4b62bbe6afc9a7
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,12 +67,12 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(object : ButtonAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-<<<<<<< HEAD
+
                 Toast.makeText(this@HomeActivity, "Hello$position", Toast.LENGTH_SHORT).show()
-=======
+
 
                 Toast.makeText(this@HomeActivity,"Hello$position", Toast.LENGTH_SHORT).show()
->>>>>>> 3ac726951736c86d54026070db4b62bbe6afc9a7
+
 
                 getData()
 
