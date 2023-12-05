@@ -1,4 +1,4 @@
-package com.example.bookify_frontend.model
+package com.example.testing
 
 import com.google.gson.annotations.SerializedName
 
@@ -23,5 +23,7 @@ data class Event(
     @SerializedName("title")
     val title: String?,
     @SerializedName("type")
-    val type: String?
+    val type: String?,
+    @SerializedName("category")
+    val category: String?
 )
