@@ -1,4 +1,4 @@
-package com.example.testing
+package com.example.bookify_frontend.ui.category
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
