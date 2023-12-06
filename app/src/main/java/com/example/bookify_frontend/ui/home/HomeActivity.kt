@@ -22,6 +22,7 @@ import android.database.MatrixCursor
 import android.provider.BaseColumns
 import com.example.bookify_frontend.model.SuggestionsAdapter
 import com.example.bookify_frontend.ui.category.CategoryActivity
+import com.example.testing.Event
 
 
 lateinit var basetext: TextView
@@ -61,7 +62,7 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(object : ButtonAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                    navigateToCategory(position)
+                navigateToCategory(position)
 
 
             }
@@ -136,7 +137,7 @@ class HomeActivity : AppCompatActivity() {
     private fun getData() {
         val apiService = RetrofitService.createApiService()
 
-        val eventsCall = apiService.getEvents()
+        //val eventsCall = apiService.getEvents()
 //        val eventsByTypeCall = apiService.getEventsByType()
         val citiesCall = apiService.getCities()
 
@@ -162,28 +163,28 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this@HomeActivity, "Cities Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
         })
 
-        eventsCall.enqueue(object : Callback<EventsResponse?> {
-            override fun onResponse(
-                call: Call<EventsResponse?>,
-                response: Response<EventsResponse?>
-            ) {
-                Toast.makeText(this@HomeActivity, "Events: Fetched!", Toast.LENGTH_SHORT).show()
-                //handle events
-                val eventsList = response.body()
-                if (eventsList != null) {
-                    for (event in eventsList) {
-                        Toast.makeText(this@HomeActivity, event.title+" :"+event.description, Toast.LENGTH_SHORT).show()
-                    }
-
-                } else {
-                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<EventsResponse?>, t: Throwable) {
-                val errorMessage = t.message
-                Toast.makeText(this@HomeActivity, "Events Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
-        })
+//        eventsCall.enqueue(object : Callback<List<Event>?> {
+//            override fun onResponse(
+//                call: Call<List<Event>?>,
+//                response: Response<List<Event>?>
+//            ) {
+//                Toast.makeText(this@HomeActivity, "Events: Fetched!", Toast.LENGTH_SHORT).show()
+//                //handle events
+//                val eventsList = response.body()
+//                if (eventsList != null) {
+//                    for (event in eventsList) {
+//                        Toast.makeText(this@HomeActivity, event.title+" :"+event.description, Toast.LENGTH_SHORT).show()
+//                    }
+//
+//                } else {
+//                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
+//                val errorMessage = t.message
+//                Toast.makeText(this@HomeActivity, "Events Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
+//        })
     }
 
 //    private fun displayEvents(eventsList: List<Event>) {
