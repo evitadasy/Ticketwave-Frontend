@@ -13,10 +13,9 @@ interface ApiService {
 //        @Path("")
 //    ): Call<List<Event>>
 
-    @GET("events/type/{type}/city/{city}")
+    @GET("events/type/{type}")
     fun getEventsByType(
-        @Path("type") type: String,
-        @Path("city") city: String
+        @Path("type") type: String
     ): Call<List<Event>>
 
     @GET("cities")
