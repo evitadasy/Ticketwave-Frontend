@@ -2,7 +2,6 @@ package com.example.testing
 
 import com.google.gson.annotations.SerializedName
 
-
 data class Event(
     @SerializedName("_id")
     val _id: String?,
