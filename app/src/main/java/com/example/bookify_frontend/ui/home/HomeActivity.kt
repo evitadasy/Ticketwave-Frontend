@@ -55,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         val headerImageView: ImageView = findViewById(R.id.headerImageView)
-        headerImageView.setImageResource(R.drawable.logo)
+        headerImageView.setImageResource(R.drawable.ticketwave)
 
         // Initialize το adapter with click listener
         val adapter = ButtonAdapter(buttonItemList)
