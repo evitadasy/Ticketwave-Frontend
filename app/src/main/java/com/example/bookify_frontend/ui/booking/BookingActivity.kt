@@ -1,10 +1,11 @@
 package com.example.bookify_frontend.ui.booking
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import com.example.bookify_frontend.R
+import com.example.bookify_frontend.ui.confirmation.ConfirmationActivity
 
 class BookingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,8 +17,11 @@ class BookingActivity : AppCompatActivity() {
 
         // Set a click listener for the button
         bookNowButton.setOnClickListener {
-            // Code to be executed when the "Book Now" button is clicked
-            Toast.makeText(this, "Book Now Button Clicked!", Toast.LENGTH_SHORT).show()
+            // Create an Intent to start the ConfirmationActivity
+            val intent = Intent(this, ConfirmationActivity::class.java)
+
+            // Start the ConfirmationActivity
+            startActivity(intent)
         }
     }
 }
