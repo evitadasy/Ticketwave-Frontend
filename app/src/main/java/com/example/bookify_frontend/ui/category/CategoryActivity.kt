@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookify_frontend.R
 import com.example.bookify_frontend.api_service.ApiService
+import com.example.bookify_frontend.api_service.RetrofitService
 import com.example.testing.CategoryAdapter
 import com.example.testing.Event
 import retrofit2.Call
@@ -39,14 +40,11 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
     }
 
     private fun fetchDataForCategory(categoryPosition: Int) {
-        val retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://bookify-zm4t.onrender.com/")
-            .build()
+        val apiService = RetrofitService.createApiService()
 
         val selectedCategory = when(categoryPosition) {
             0 -> "cinema"
-            1 -> "concert"
+            1 -> "live"
             2 -> "food"
             3 -> "sports"
             4 -> "seminar"
@@ -55,7 +53,7 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             else -> "museums"
         }
 
-        val retrofitAPI = retrofit.create(ApiService::class.java).getEventsByType(selectedCategory.capitalize(Locale.ROOT))
+        val retrofitAPI = apiService.getEventsByType(selectedCategory.capitalize(Locale.ROOT))
 
         retrofitAPI.enqueue(object : Callback<List<Event>?> {
             override fun onResponse(
