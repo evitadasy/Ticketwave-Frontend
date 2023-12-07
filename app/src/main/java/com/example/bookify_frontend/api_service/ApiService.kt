@@ -18,6 +18,17 @@ interface ApiService {
         @Path("type") type: String
     ): Call<List<Event>>
 
+    @GET("events/city/{city}")
+    fun getEventsByCity(
+        @Path("city") city: String
+    ): Call<List<Event>>
+
+    @GET("events/type/{type}/{city}")
+    fun getEventsByTypeAndCity(
+        @Path("type") type: String,
+        @Path("city") city: String
+    ): Call<List<Event>>
+
     @GET("cities")
     fun getCities(): Call<CitiesResponse>
 }
