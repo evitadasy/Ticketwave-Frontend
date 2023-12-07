@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <!-- Background color or image -->
+        <shape
+            android:shape="rectangle">
+            <!-- You can set a solid color or an image as the background -->
+            <solid android:color="#4A9147" />
+            <!-- Set the radius for rounded corners -->
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+    <item android:right="1dp">
+        <!-- Border -->
+        <shape
+            android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="2dp"
+                android:color="#6FBA5A" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</layer-list>
