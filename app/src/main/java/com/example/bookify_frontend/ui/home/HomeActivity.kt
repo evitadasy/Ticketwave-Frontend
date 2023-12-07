@@ -25,6 +25,7 @@ import com.example.bookify_frontend.ui.category.CategoryActivity
 import com.example.testing.Event
 
 
+
 lateinit var basetext: TextView
 lateinit var btn: Button
 private val searchSuggestions = arrayListOf<String>()
