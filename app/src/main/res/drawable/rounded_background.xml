@@ -5,7 +5,7 @@
         <shape
             android:shape="rectangle">
             <!-- You can set a solid color or an image as the background -->
-            <solid android:color="#4A9147" />
+            <solid android:color="#67AB89" />
             <!-- Set the radius for rounded corners -->
             <corners android:radius="16dp" />
         </shape>
@@ -17,7 +17,7 @@
             <solid android:color="@android:color/transparent" />
             <stroke
                 android:width="2dp"
-                android:color="#6FBA5A" />
+                android:color="#67AB89" />
             <corners android:radius="16dp" />
         </shape>
     </item>
