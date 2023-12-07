@@ -36,7 +36,7 @@
         <TextView
             android:id="@+id/categoryTitleTextView"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Category Title"
             android:textSize="18sp"
@@ -45,10 +45,23 @@
         <TextView
             android:id="@+id/categoryDescriptionTextView"
             android:layout_width="175dp"
-            android:layout_height="90dp"
+            android:layout_height="41dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="Category Description"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/datess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/Hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hour"
             android:textSize="16sp" />
 
     </LinearLayout>

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookify_frontend.R
 import com.example.testing.Event
 import com.squareup.picasso.Picasso
+import org.w3c.dom.Text
 
 class CategoryAdapter(private val itemList: List<Event>, private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -32,7 +33,8 @@ class CategoryAdapter(private val itemList: List<Event>, private val onItemClick
             .into(holder.categoryImageView)
 
         holder.titleTextView.text = currentItem.title
-        holder.descriptionTextView.text = currentItem.description
+        holder.descriptionTextView.text = currentItem.city
+        holder.datess.text = currentItem.date
 
         // Set click listener
         holder.itemView.setOnClickListener {
@@ -51,6 +53,7 @@ class CategoryAdapter(private val itemList: List<Event>, private val onItemClick
 
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val categoryImageView: ImageView = itemView.findViewById(R.id.categoryImageView)
+        val datess: TextView = itemView.findViewById(R.id.datess)
         val titleTextView: TextView = itemView.findViewById(R.id.categoryTitleTextView)
         val descriptionTextView: TextView = itemView.findViewById(R.id.categoryDescriptionTextView)
     }
