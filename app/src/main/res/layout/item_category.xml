@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -31,7 +32,8 @@
         android:layout_height="194dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        tools:ignore="ExtraText">
 
         <TextView
             android:id="@+id/categoryTitleTextView"
@@ -43,25 +45,51 @@
             android:text="Category Title"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/city"
-            android:layout_width="175dp"
-            android:layout_height="66dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="City"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/datess"
+ //CITY
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:text="Date"
-            android:textSize="20sp"
-            android:maxLength="10"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/location"
+                android:layout_marginEnd="8dp" />
+
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="175dp"
+                android:layout_height="66dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="City"
+                android:textSize="20sp" />
+        </LinearLayout>
+//DATE
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Image for datess -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/calendar"
+                android:layout_marginEnd="8dp" />
+
+            <!-- TextView for datess -->
+            <TextView
+                android:id="@+id/datess"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:text="Date"
+                android:textSize="20sp"
+                android:maxLength="10"/>
+        </LinearLayout>
 
     </LinearLayout>
 
