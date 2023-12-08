@@ -70,32 +70,6 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
                     categoryAdapter = CategoryAdapter(eventsResponse, this@CategoryActivity)
                     recyclerView.adapter = categoryAdapter
 
-                    // Filter events based on the selected category
-//                    val filteredEvents = when (categoryPosition) {
-//                        0 -> eventsList.filter { it.category == "Cinema" }
-//                        1 -> eventsList.filter { it.category == "Concert" }
-//                        2 -> eventsList.filter { it.category == "Food" }
-//                        3 -> eventsList.filter { it.category == "Sports"  }
-//                        4 -> eventsList.filter { it.category == "Seminar"}
-//                        5 -> eventsList.filter { it.category == "Theatre" }
-//                        6 -> eventsList.filter { it.category == "Kids"  }
-//                        7 -> eventsList.filter { it.category == "Museums" }
-//
-//                        // Add more cases for other categories
-//                        else -> emptyList()
-//                    }
-
-                    // Update the categoryItemList and notify adapter
-                    //     categoryItemList.clear()
-//                    for (event in filteredEvents) {
-//                        categoryItemList.add(
-//                            CategoryItem(
-//                                event.img ?: "",
-//                                event.title ?: "",
-//                                event.description ?: ""
-//                            )
-//                        )
-//                    }
                     categoryAdapter.notifyDataSetChanged()
                 }
             }
