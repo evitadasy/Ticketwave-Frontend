@@ -1,5 +1,6 @@
 package com.example.bookify_frontend.ui.category
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookify_frontend.R
 import com.example.bookify_frontend.api_service.ApiService
 import com.example.bookify_frontend.api_service.RetrofitService
+import com.example.bookify_frontend.ui.booking.BookingActivity
 import com.example.testing.CategoryAdapter
 import com.example.testing.Event
 import retrofit2.Call
@@ -42,7 +44,7 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
     private fun fetchDataForCategory(categoryPosition: Int) {
         val apiService = RetrofitService.createApiService()
 
-        val selectedCategory = when(categoryPosition) {
+        val selectedCategory = when (categoryPosition) {
             0 -> "cinema"
             1 -> "live"
             2 -> "food"
@@ -107,7 +109,15 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
 
     // Implement the onItemClick method
     override fun onItemClick(event: Event) {
-        // Handle the click event here
-        Toast.makeText(this, "Clicked on event: ${event.title}", Toast.LENGTH_SHORT).show()
+        // Create an Intent to start the BookingActivity
+        val intent = Intent(this@CategoryActivity, BookingActivity::class.java)
+
+        // Pass data to BookingActivity using Intent extras
+        intent.putExtra("EVENT_TITLE", event.title)
+        intent.putExtra("EVENT_DATE", event.date)
+        intent.putExtra("EVENT_CITY", event.city)
+
+        // Start the BookingActivity
+        startActivity(intent)
     }
 }
