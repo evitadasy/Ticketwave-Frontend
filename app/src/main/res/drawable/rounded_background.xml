@@ -14,7 +14,7 @@
         <!-- Border -->
         <shape
             android:shape="rectangle">
-            <solid android:color="#67AB89" />
+            <solid android:color="@color/white" />
             <stroke
                 android:width="6dp"
                 android:color="@color/black" />

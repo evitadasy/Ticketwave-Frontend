@@ -33,8 +33,10 @@ class CategoryAdapter(private val itemList: List<Event>, private val onItemClick
             .into(holder.categoryImageView)
 
         holder.titleTextView.text = currentItem.title
-        holder.descriptionTextView.text = currentItem.city
+        holder.city.text = currentItem.city
         holder.datess.text = currentItem.date
+
+
 
         // Set click listener
         holder.itemView.setOnClickListener {
@@ -53,8 +55,14 @@ class CategoryAdapter(private val itemList: List<Event>, private val onItemClick
 
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val categoryImageView: ImageView = itemView.findViewById(R.id.categoryImageView)
-        val datess: TextView = itemView.findViewById(R.id.datess)
+
         val titleTextView: TextView = itemView.findViewById(R.id.categoryTitleTextView)
-        val descriptionTextView: TextView = itemView.findViewById(R.id.categoryDescriptionTextView)
+        val datess: TextView = itemView.findViewById(R.id.datess)
+        val city: TextView = itemView.findViewById(R.id.city)
+
+
+
+
+
     }
 }

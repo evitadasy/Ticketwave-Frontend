@@ -13,16 +13,16 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="180dp"
-        android:layout_height="161dp"
+        android:layout_height="183dp"
         app:cardCornerRadius="20dp">
 
         <ImageView
             android:id="@+id/categoryImageView"
-            android:layout_width="match_parent"
+            android:layout_width="182dp"
             android:layout_height="match_parent"
+            android:background="@android:color/black"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_image_placeholder"
-            android:background="@android:color/black" />
+            android:src="@drawable/ic_image_placeholder" />
 
     </androidx.cardview.widget.CardView>
 
@@ -36,33 +36,32 @@
         <TextView
             android:id="@+id/categoryTitleTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="#7E4141"
             android:text="Category Title"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/categoryDescriptionTextView"
+            android:id="@+id/city"
             android:layout_width="175dp"
-            android:layout_height="41dp"
+            android:layout_height="66dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Category Description"
-            android:textSize="16sp" />
+            android:text="City"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/datess"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="46dp"
             android:text="Date"
-            android:textSize="16sp" />
+            android:textSize="20sp"
+            android:maxLength="10"/>
 
-        <TextView
-            android:id="@+id/Hour"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hour"
-            android:textSize="16sp" />
+
 
     </LinearLayout>
 
