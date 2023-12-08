@@ -116,6 +116,11 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
         intent.putExtra("EVENT_TITLE", event.title)
         intent.putExtra("EVENT_DATE", event.date)
         intent.putExtra("EVENT_CITY", event.city)
+        intent.putExtra("EVENT_DESCRIPTION",event.description)
+        intent.putExtra("PRICE",event.price)
+        intent.putExtra("EVENT_IMAGE",event.img)
+
+
 
         // Start the BookingActivity
         startActivity(intent)
