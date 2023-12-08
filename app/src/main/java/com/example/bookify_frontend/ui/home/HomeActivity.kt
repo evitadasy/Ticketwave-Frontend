@@ -5,21 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import com.example.bookify_frontend.R
-import com.example.bookify_frontend.model.EventsResponse
 import android.widget.ImageView
 import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookify_frontend.api_service.RetrofitService
-import com.example.bookify_frontend.model.CitiesResponse
 import com.squareup.picasso.Target
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.database.MatrixCursor
 import android.provider.BaseColumns
+import android.widget.Toast
+import com.example.bookify_frontend.model.City
 import com.example.bookify_frontend.model.SuggestionsAdapter
 import com.example.bookify_frontend.ui.category.CategoryActivity
 import com.example.testing.Event
@@ -56,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         val headerImageView: ImageView = findViewById(R.id.headerImageView)
-        headerImageView.setImageResource(R.drawable.ticketwave)
+        headerImageView.setImageResource(R.drawable.logo_small)
 
         // Initialize το adapter with click listener
         val adapter = ButtonAdapter(buttonItemList)
@@ -142,11 +141,10 @@ class HomeActivity : AppCompatActivity() {
 //        val eventsByTypeCall = apiService.getEventsByType()
         val citiesCall = apiService.getCities()
 
-        citiesCall.enqueue(object : Callback<CitiesResponse?> {
+        citiesCall.enqueue(object : Callback<List<City>?> {
             override fun onResponse(
-                call: Call<CitiesResponse?>,
-                response: Response<CitiesResponse?>
-            ) {
+                call: Call<List<City>?>,
+                response: Response<List<City>?>) {
                 Toast.makeText(this@HomeActivity, "Cities: Fetched!", Toast.LENGTH_SHORT).show()
                 //handle cities
                 val citiesList = response.body()
@@ -159,72 +157,35 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<CitiesResponse?>, t: Throwable) {
+            override fun onFailure(call: Call<List<City>?>, t: Throwable) {
                 val errorMessage = t.message
-                Toast.makeText(this@HomeActivity, "Cities Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
+                Toast.makeText(this@HomeActivity, "Cities Failed: $errorMessage", Toast.LENGTH_SHORT).show()
+            }
         })
 
-//        eventsCall.enqueue(object : Callback<List<Event>?> {
+//        citiesCall.enqueue(object : Callback<List<City>?> {
 //            override fun onResponse(
-//                call: Call<List<Event>?>,
-//                response: Response<List<Event>?>
+//                call: Callback<List<City>?>,
+//                response: Callback<List<City>?>
 //            ) {
-//                Toast.makeText(this@HomeActivity, "Events: Fetched!", Toast.LENGTH_SHORT).show()
-//                //handle events
-//                val eventsList = response.body()
-//                if (eventsList != null) {
-//                    for (event in eventsList) {
-//                        Toast.makeText(this@HomeActivity, event.title+" :"+event.description, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@HomeActivity, "Cities: Fetched!", Toast.LENGTH_SHORT).show()
+//                //handle cities
+//                val citiesList = response.body()
+//                if (citiesList != null) {
+//                    for (city in citiesList) {
+//                        Toast.makeText(this@HomeActivity, city.cityName, Toast.LENGTH_SHORT).show()
 //                    }
-//
 //                } else {
 //                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
 //                }
 //            }
 //
-//            override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
+//            override fun onFailure(call: Callback<List<City>?>, t: Throwable) {
 //                val errorMessage = t.message
-//                Toast.makeText(this@HomeActivity, "Events Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
+//                Toast.makeText(this@HomeActivity, "Cities Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
 //        })
+
+
     }
 
-//    private fun displayEvents(eventsList: List<Event>) {
-//        // Assuming you have a TextView in your layout with id 'textView'
-////        val textView = findViewById<TextView>(R.id.textView)
-//
-//        // Create a StringBuilder to build the display text
-//        val displayText = StringBuilder()
-//
-//        for (event in eventsList) {
-//            // Append event details to the display text
-//            displayText.append("Event Title: ${event.title}\n")
-//            displayText.append("Event Date: ${event.date}\n")
-//            displayText.append("Description: ${event.description}\n")
-//
-//            // Load and display the image using Picasso
-//            event.img?.let {
-//                Picasso.get().load(it).into(object : Target {
-//                    override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-//                        // Assuming you have an ImageView in your layout with id 'imageView'
-//                        val imageView = findViewById<ImageView>(R.id.imageView)
-//                        imageView.setImageBitmap(bitmap)
-//                    }
-//
-//                    override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-//                        // Handle the case where image loading fails
-//                    }
-//
-//                    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-//                        // Handle the case where the image is still loading
-//                    }
-//                })
-//            }
-//
-//            displayText.append("\n\n")
-//
-//        }
-//
-//        // Set the display text in the TextView
-////        textView.text = displayText.toString()
-//    }
 }

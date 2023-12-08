@@ -1,7 +1,6 @@
 package com.example.bookify_frontend.api_service
 
-import com.example.bookify_frontend.model.CitiesResponse
-import com.example.bookify_frontend.model.EventsResponse
+import com.example.bookify_frontend.model.City
 import com.example.testing.Event
 import retrofit2.Call
 import retrofit2.http.GET
@@ -30,5 +29,5 @@ interface ApiService {
     ): Call<List<Event>>
 
     @GET("cities")
-    fun getCities(): Call<CitiesResponse>
+    fun getCities(): Call<List<City>>
 }
