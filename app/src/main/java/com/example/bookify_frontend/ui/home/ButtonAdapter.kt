@@ -47,7 +47,7 @@ class ButtonAdapter(private val buttonList: List<ButtonItem>) :
     }
 
     inner class ButtonViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
-        val imageButton: ImageView = itemView.findViewById(R.id.imageButton)
+        val imageButton: ImageView = itemView.findViewById(R.id.homeImageView)
         val buttonText: TextView = itemView.findViewById(R.id.buttonText)
         init {
             itemView.setOnClickListener{

@@ -1,96 +1,147 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<!-- res/layout/your_card_layout.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/rounded_background"
-    android:orientation="horizontal"
-    android:padding="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginBottom="10dp">
+    android:layout_margin="5dp"
+    android:background="@drawable/shadow_btn"
+    app:cardCornerRadius="15dp"
+    app:cardUseCompatPadding="true">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="180dp"
-        android:layout_height="183dp"
-        app:cardCornerRadius="20dp">
+    <!-- Root LinearLayout with horizontal orientation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
+        <!-- Left side ImageView (half of the CardView width) -->
         <ImageView
             android:id="@+id/categoryImageView"
-            android:layout_width="182dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@android:color/black"
+            android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_image_placeholder" />
 
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="168dp"
-        android:layout_height="194dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingStart="16dp"
-        tools:ignore="ExtraText">
-
-        <TextView
-            android:id="@+id/categoryTitleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="#7E4141"
-            android:text="Category Title"
-            android:textSize="18sp"
-            android:textStyle="bold" />
- //CITY
+        <!-- Right side LinearLayout (other half of the CardView width) -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/location"
-                android:layout_marginEnd="8dp" />
-
+            <!-- Title TextView -->
 
             <TextView
-                android:id="@+id/city"
-                android:layout_width="175dp"
-                android:layout_height="66dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="City"
-                android:textSize="20sp" />
-        </LinearLayout>
-//DATE
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!-- Image for datess -->
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/calendar"
-                android:layout_marginEnd="8dp" />
-
-            <!-- TextView for datess -->
-            <TextView
-                android:id="@+id/datess"
+                android:id="@+id/categoryTitle"
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:text="Date"
-                android:textSize="20sp"
-                android:maxLength="10"/>
+                android:layout_height="wrap_content"
+                android:text="Event Title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/plain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp" />
+
+
+            <!-- Day TextView -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/location_gray" />
+
+                <TextView
+                    android:id="@+id/plainl3"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event Place"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/plain2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp" />
+
+            <!-- Hour TextView -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/calendar_gray" />
+
+                <TextView
+                    android:id="@+id/plainl"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/day"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Event Day"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/plain3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/clock_gray" />
+
+                <TextView
+                    android:id="@+id/plainl2"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/hour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event Hour"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Place TextView -->
+
         </LinearLayout>
-
     </LinearLayout>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>
