@@ -2,6 +2,8 @@ package com.example.bookify_frontend.ui.category
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,12 +26,14 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
     private val categoryItemList = mutableListOf<CategoryItem>()
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var categoryImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-        // Find the SwipeRefreshLayout in your layout
+        // Find the ImageView and SwipeRefreshLayout in your layout
+        categoryImageView = findViewById(R.id.categoryImageView)
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
             // Handle the refresh action
@@ -40,8 +44,11 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             val cityPosition = intent.getIntExtra("CITY_POSITION", -1)
             if (categoryPosition != -1) {
                 fetchDataForCategory(categoryPosition)
+                updateCategoryImage(categoryPosition)
             } else if (cityPosition != -1) {
                 fetchDataForCity(cityPosition)
+                // Set a default image for cities or hide the ImageView if not needed
+                categoryImageView.visibility = View.GONE
             }
         }
 
@@ -52,13 +59,33 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
         if (categoryPosition != -1) {
             // Make an API call to fetch data for the selected category
             fetchDataForCategory(categoryPosition)
+            updateCategoryImage(categoryPosition)
         } else if (cityPosition != -1) {
-// Make an API call to fetch data forthe selected city
+            // Make an API call to fetch data for the selected city
             fetchDataForCity(cityPosition)
+            // Set a default image for cities or hide the ImageView if not needed
+            categoryImageView.visibility = View.GONE
         } else {
-// Handle the case where neither category nor city position is provided
+            // Handle the case where neither category nor city position is provided
             Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun updateCategoryImage(categoryPosition: Int) {
+        // Update the ImageView based on the selected category
+        val categoryDrawableResource = when (categoryPosition) {
+            0 -> R.drawable.cinemawave
+            1 -> R.drawable.livewave
+            2 -> R.drawable.foodwave
+            3 -> R.drawable.sportswave
+            4 -> R.drawable.seminarwave
+            5 -> R.drawable.theatrewave
+            6 -> R.drawable.kidswave
+            7 -> R.drawable.museumwave
+            else -> R.drawable.default_category_image
+        }
+
+        categoryImageView.setImageResource(categoryDrawableResource)
     }
 
     private fun fetchDataForCity(cityPosition: Int) {
@@ -103,8 +130,11 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
                 // Handle failure
                 // Indicate the end of the refresh
                 swipeRefreshLayout.isRefreshing = false
-                Toast.makeText(this@CategoryActivity, "Failed to fetch events", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(
+                    this@CategoryActivity,
+                    "Failed to fetch events",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }
@@ -126,7 +156,8 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             else -> "museums"
         }
 
-        val eventsByTypeCall = apiService.getEventsByType(selectedCategory.capitalize(Locale.ROOT))
+        val eventsByTypeCall =
+            apiService.getEventsByType(selectedCategory.capitalize(Locale.ROOT))
 
         eventsByTypeCall.enqueue(object : Callback<List<Event>?> {
             override fun onResponse(
