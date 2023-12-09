@@ -38,22 +38,18 @@
                 android:id="@+id/categoryTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:text="Event Title"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/plain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp" />
 
 
             <!-- Day TextView -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="21dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/imageView10"
@@ -62,31 +58,21 @@
                     android:src="@drawable/location_gray" />
 
                 <TextView
-                    android:id="@+id/plainl3"
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp" />
-
-                <TextView
                     android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:text="Event Place"
                     android:textSize="16sp" />
             </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/plain2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="10sp" />
-
             <!-- Hour TextView -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/imageView5"
@@ -94,11 +80,7 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/calendar_gray" />
 
-                <TextView
-                    android:id="@+id/plainl"
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp" />
+
 
                 <TextView
                     android:id="@+id/day"
@@ -109,11 +91,7 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/plain3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="10sp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,11 +104,7 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/clock_gray" />
 
-                <TextView
-                    android:id="@+id/plainl2"
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp" />
+
 
                 <TextView
                     android:id="@+id/hour"

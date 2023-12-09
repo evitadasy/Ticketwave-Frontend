@@ -13,7 +13,7 @@ class BookingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
 
-//        val event = intent.getParcelableExtra<Event>("Event")
+       val event = intent.getParcelableExtra<Event>("Event")
 
 
         // Find the "Book Now" button in the layout
