@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.bookify_frontend.R
 import com.example.bookify_frontend.api_service.RetrofitService
 import com.example.bookify_frontend.ui.booking.BookingActivity
@@ -22,10 +23,27 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
 
     private val categoryItemList = mutableListOf<CategoryItem>()
     private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
+
+        // Find the SwipeRefreshLayout in your layout
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            // Handle the refresh action
+            // Clear existing data
+            categoryItemList.clear()
+
+            val categoryPosition = intent.getIntExtra("CATEGORY_POSITION", -1)
+            val cityPosition = intent.getIntExtra("CITY_POSITION", -1)
+            if (categoryPosition != -1) {
+                fetchDataForCategory(categoryPosition)
+            } else if (cityPosition != -1) {
+                fetchDataForCity(cityPosition)
+            }
+        }
 
         // Get the selected category position and city position from intent
         val categoryPosition = intent.getIntExtra("CATEGORY_POSITION", -1)
@@ -35,15 +53,18 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             // Make an API call to fetch data for the selected category
             fetchDataForCategory(categoryPosition)
         } else if (cityPosition != -1) {
-            // Make an API call to fetch data for the selected city
+// Make an API call to fetch data forthe selected city
             fetchDataForCity(cityPosition)
         } else {
-            // Handle the case where neither category nor city position is provided
+// Handle the case where neither category nor city position is provided
             Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun fetchDataForCity(cityPosition: Int) {
+        // Indicate the start of the refresh
+        swipeRefreshLayout.isRefreshing = true
+
         val apiService = RetrofitService.createApiService()
 
         val selectedCity = when (cityPosition) {
@@ -62,6 +83,9 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
                 call: Call<List<Event>?>,
                 response: Response<List<Event>?>
             ) {
+                // Indicate the end of the refresh
+                swipeRefreshLayout.isRefreshing = false
+
                 val eventsResponse = response.body()
 
                 if (eventsResponse != null) {
@@ -76,12 +100,18 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
 
             override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
                 // Handle failure
-                Toast.makeText(this@CategoryActivity, "Failed to fetch events", Toast.LENGTH_SHORT).show()
+                // Indicate the end of the refresh
+                swipeRefreshLayout.isRefreshing = false
+                Toast.makeText(this@CategoryActivity, "Failed to fetch events", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }
 
     private fun fetchDataForCategory(categoryPosition: Int) {
+        // Indicate the start of the refresh
+        swipeRefreshLayout.isRefreshing = true
+
         val apiService = RetrofitService.createApiService()
 
         val selectedCategory = when (categoryPosition) {
@@ -102,6 +132,9 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
                 call: Call<List<Event>?>,
                 response: Response<List<Event>?>
             ) {
+                // Indicate the end of the refresh
+                swipeRefreshLayout.isRefreshing = false
+
                 val eventsResponse = response.body()
 
                 if (eventsResponse != null) {
@@ -116,6 +149,8 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
 
             override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
                 // Handle failure
+                // Indicate the end of the refresh
+                swipeRefreshLayout.isRefreshing = false
             }
         })
     }

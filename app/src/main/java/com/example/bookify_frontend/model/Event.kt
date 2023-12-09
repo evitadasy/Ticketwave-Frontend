@@ -28,6 +28,7 @@ data class Event(
     val type: String?,
     @SerializedName("category")
     val category: String?
+
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
