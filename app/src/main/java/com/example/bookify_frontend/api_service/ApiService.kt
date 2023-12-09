@@ -7,11 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
-//    @GET("events")
-//    fun getEvents(
-//        @Path("")
-//    ): Call<List<Event>>
-
     @GET("events/type/{type}")
     fun getEventsByType(
         @Path("type") type: String
@@ -22,11 +17,11 @@ interface ApiService {
         @Path("city") city: String
     ): Call<List<Event>>
 
-    @GET("events/type/{type}/{city}")
-    fun getEventsByTypeAndCity(
-        @Path("type") type: String,
-        @Path("city") city: String
-    ): Call<List<Event>>
+//    @GET("events/type/{type}/{city}")
+//    fun getEventsByTypeAndCity(
+//        @Path("type") type: String,
+//        @Path("city") city: String
+//    ): Call<List<Event>>
 
     @GET("cities")
     fun getCities(): Call<List<City>>

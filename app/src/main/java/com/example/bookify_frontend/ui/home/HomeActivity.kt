@@ -23,7 +23,7 @@ import com.example.bookify_frontend.ui.category.CategoryActivity
 
 
 private val searchSuggestions = arrayListOf<String>()
-private var cities: List<City> = TODO()
+//private var cities: List<City> = TODO()
 
 class HomeActivity : AppCompatActivity() {
 
@@ -140,7 +140,7 @@ class HomeActivity : AppCompatActivity() {
                 val citiesList = response.body()
                 if (citiesList != null) {
                     //add cities to a List<City>
-                    cities = citiesList
+//                    cities = citiesList
                 } else {
                     Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
                 }

@@ -37,8 +37,39 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             // Make an API call to fetch data for the selected category
             fetchDataForCategory(categoryPosition)
         } else {
-            // Handle error or default behavior
+//            if (cityPosition!=-1) fetchDataForCity(cityPosition)
         }
+    }
+
+    private fun fetchDataForCity(cityPosition: Int){
+        val apiService = RetrofitService.createApiService()
+
+        val selectedCity = when (cityPosition) {
+            0 -> "Thessaloniki"
+            1 -> "Athens"
+            2 -> "Patra"
+            3 -> "Katerini"
+            4 -> "Volos"
+            else ->  "Heraklion"
+        }
+
+        val eventsByCityCall = apiService.getEventsByCity(selectedCity)
+
+        eventsByCityCall.enqueue(object : Callback<List<Event>?> {
+            override fun onResponse(
+                call: Call<List<Event>?>,
+                response: Response<List<Event>?>) {
+                TODO("Not yet implemented")
+                //PANAGIOTIS CALL
+            }
+
+            override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+
+
+
     }
 
     private fun fetchDataForCategory(categoryPosition: Int) {
@@ -55,9 +86,9 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             else -> "museums"
         }
 
-        val retrofitAPI = apiService.getEventsByType(selectedCategory.capitalize(Locale.ROOT))
+        val eventsByTypeCall = apiService.getEventsByType(selectedCategory.capitalize(Locale.ROOT))
 
-        retrofitAPI.enqueue(object : Callback<List<Event>?> {
+        eventsByTypeCall.enqueue(object : Callback<List<Event>?> {
             override fun onResponse(
                 call: Call<List<Event>?>,
                 response: Response<List<Event>?>
@@ -86,14 +117,15 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
         // Create an Intent to start the BookingActivity
         val intent = Intent(this@CategoryActivity, BookingActivity::class.java)
 
-        // Pass data to BookingActivity using Intent extras
-        intent.putExtra("EVENT_TITLE", event.title)
-        intent.putExtra("EVENT_DATE", event.date)
-        intent.putExtra("EVENT_CITY", event.city)
-        intent.putExtra("EVENT_DESCRIPTION",event.description)
-        intent.putExtra("PRICE",event.price)
-        intent.putExtra("EVENT_IMAGE",event.img)
+//        // Pass data to BookingActivity using Intent extras
+//        intent.putExtra("EVENT_TITLE", event.title)
+//        intent.putExtra("EVENT_DATE", event.date)
+//        intent.putExtra("EVENT_CITY", event.city)
+//        intent.putExtra("EVENT_DESCRIPTION",event.description)
+//        intent.putExtra("PRICE",event.price)
+//        intent.putExtra("EVENT_IMAGE",event.img)
 
+        intent.putExtra("Event", event)
 
 
         // Start the BookingActivity
