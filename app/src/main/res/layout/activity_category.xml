@@ -6,9 +6,9 @@
     <ImageView
         android:id="@+id/categoryImageView"
         android:layout_width="match_parent"
-        android:layout_height="79dp"
-        android:src="@drawable/default_category_image"
-        android:layout_marginBottom="10dp">
+        android:layout_height="64dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/default_category_image">
 
     </ImageView>
 
