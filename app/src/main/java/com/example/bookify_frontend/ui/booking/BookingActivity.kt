@@ -10,6 +10,9 @@ import com.example.bookify_frontend.ui.confirmation.ConfirmationActivity
 import com.example.testing.Event
 import com.squareup.picasso.Picasso
 import android.content.Intent
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.TimeZone
 
 
 class BookingActivity : AppCompatActivity() {
@@ -33,14 +36,24 @@ class BookingActivity : AppCompatActivity() {
 
         event?.let {
             titleTextView.text = it.title
-            dateTextView.text = it.date
             cityTextView.text = it.city
             descriptionTextView.text = it.description
             priceTextView.text = it.price.toString()
             placeTextView.text = it.location
-            timeTextView.text = it.date
             pricingdetailsTextView.text = it.pricingdetails
 
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+            val outputDateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val outputTimeFormat = SimpleDateFormat("HH:mm:ss")
+
+            val date: Date? = inputFormat.parse(it.date)
+
+            val formattedDate: String = date?.let { outputDateFormat.format(it) } ?: ""
+            val formattedTime: String = date?.let { outputTimeFormat.format(it) } ?: ""
+
+            dateTextView.text = formattedDate
+
+            timeTextView.text = formattedTime
         }
 
         Picasso.get()
