@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class City(
     @SerializedName("_id")
-    val _id: String,
+    val id: String,
     @SerializedName("name")
-    val cityName: String
+    val name: String
 )

@@ -3,15 +3,12 @@ package com.example.bookify_frontend.ui.home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import com.example.bookify_frontend.R
 import android.widget.ImageView
 import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookify_frontend.api_service.RetrofitService
-import com.squareup.picasso.Target
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,14 +18,12 @@ import android.widget.Toast
 import com.example.bookify_frontend.model.City
 import com.example.bookify_frontend.model.SuggestionsAdapter
 import com.example.bookify_frontend.ui.category.CategoryActivity
-import com.example.testing.Event
 
 
 
-lateinit var basetext: TextView
-lateinit var btn: Button
+
 private val searchSuggestions = arrayListOf<String>()
-
+private var cities: List<City> = TODO()
 
 class HomeActivity : AppCompatActivity() {
 
@@ -44,10 +39,9 @@ class HomeActivity : AppCompatActivity() {
     )
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fetchCities()
         setContentView(R.layout.activity_home)
 
 
@@ -70,15 +64,11 @@ class HomeActivity : AppCompatActivity() {
         // Set up the SearchView
         val searchView: SearchView = findViewById(R.id.searchView)
         val searchHints = arrayOf(
-            "Hungry?",
-            "What do you wanna listen today?",
-            "What movie do you wanna watch?",
-            "What about a theatre play?"
+            "Search by city...",
+            "Search here..."
         )
         val randomIndex = (0 until searchHints.size).random()
         searchView.queryHint = searchHints[randomIndex]
-
-        // edw ksekinaei to search suggestion apo API
 
 
         initSearchSuggestions()
@@ -121,12 +111,15 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initSearchSuggestions() {
+        //YOU HAVE THE CHANGE TO CODE TO BE DYNAMIC@Evita!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // For now some dummy data
         searchSuggestions.add("Thessaloniki")
         searchSuggestions.add("Larissa")
         searchSuggestions.add("Bolos")
         searchSuggestions.add("Athens")
     }
+
+
     private fun navigateToCategory(position: Int) {
         val intent = Intent(this@HomeActivity, CategoryActivity::class.java)
         intent.putExtra("CATEGORY_POSITION", position)
@@ -134,24 +127,20 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    private fun getData() {
+    private fun fetchCities() {
         val apiService = RetrofitService.createApiService()
 
-        //val eventsCall = apiService.getEvents()
-//        val eventsByTypeCall = apiService.getEventsByType()
         val citiesCall = apiService.getCities()
 
         citiesCall.enqueue(object : Callback<List<City>?> {
             override fun onResponse(
                 call: Call<List<City>?>,
                 response: Response<List<City>?>) {
-                Toast.makeText(this@HomeActivity, "Cities: Fetched!", Toast.LENGTH_SHORT).show()
                 //handle cities
                 val citiesList = response.body()
                 if (citiesList != null) {
-                    for (city in citiesList) {
-                        Toast.makeText(this@HomeActivity, city.cityName, Toast.LENGTH_SHORT).show()
-                    }
+                    //add cities to a List<City>
+                    cities = citiesList
                 } else {
                     Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
                 }
@@ -162,29 +151,6 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this@HomeActivity, "Cities Failed: $errorMessage", Toast.LENGTH_SHORT).show()
             }
         })
-
-//        citiesCall.enqueue(object : Callback<List<City>?> {
-//            override fun onResponse(
-//                call: Callback<List<City>?>,
-//                response: Callback<List<City>?>
-//            ) {
-//                Toast.makeText(this@HomeActivity, "Cities: Fetched!", Toast.LENGTH_SHORT).show()
-//                //handle cities
-//                val citiesList = response.body()
-//                if (citiesList != null) {
-//                    for (city in citiesList) {
-//                        Toast.makeText(this@HomeActivity, city.cityName, Toast.LENGTH_SHORT).show()
-//                    }
-//                } else {
-//                    Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Callback<List<City>?>, t: Throwable) {
-//                val errorMessage = t.message
-//                Toast.makeText(this@HomeActivity, "Cities Failed: $errorMessage", Toast.LENGTH_SHORT).show()            }
-//        })
-
 
     }
 
