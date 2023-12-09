@@ -71,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
         searchView.queryHint = searchHints[randomIndex]
 
 
-        initSearchSuggestions()
+        //initSearchSuggestions()
 
         // Create and set the custom adapter for the SearchView
         val suggestionAdapter = SuggestionsAdapter(
@@ -110,13 +110,11 @@ class HomeActivity : AppCompatActivity() {
         return cursor
     }
 
-    private fun initSearchSuggestions() {
-        //YOU HAVE THE CHANGE TO CODE TO BE DYNAMIC@Evita!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // For now some dummy data
-        searchSuggestions.add("Thessaloniki")
-        searchSuggestions.add("Larissa")
-        searchSuggestions.add("Bolos")
-        searchSuggestions.add("Athens")
+    private fun initSearchSuggestions(cities: List<City>?) {
+        searchSuggestions.clear()
+        cities?.forEach { city ->
+            searchSuggestions.add(city.name)
+        }
     }
 
 
@@ -135,12 +133,14 @@ class HomeActivity : AppCompatActivity() {
         citiesCall.enqueue(object : Callback<List<City>?> {
             override fun onResponse(
                 call: Call<List<City>?>,
-                response: Response<List<City>?>) {
-                //handle cities
+                response: Response<List<City>?>
+            ) {
+                // Handle cities
                 val citiesList = response.body()
                 if (citiesList != null) {
-                    //add cities to a List<City>
-//                    cities = citiesList
+                    // Add cities to a List<City>
+                    // cities = citiesList // You can uncomment this if you want to store the cities for later use
+                    initSearchSuggestions(citiesList)
                 } else {
                     Toast.makeText(this@HomeActivity, "Response body is null", Toast.LENGTH_SHORT).show()
                 }
