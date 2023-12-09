@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
 
     private val buttonItemList = listOf(
         ButtonItem(R.drawable.cinema, "Cinema"),
-        ButtonItem(R.drawable.concert, "Concert"),
+        ButtonItem(R.drawable.concert, "Live Shows"),
         ButtonItem(R.drawable.food, "Food"),
         ButtonItem(R.drawable.sports, "Sports"),
         ButtonItem(R.drawable.seminar, "Seminar"),
