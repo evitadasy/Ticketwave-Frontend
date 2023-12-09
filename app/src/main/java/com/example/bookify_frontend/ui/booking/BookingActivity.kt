@@ -25,7 +25,7 @@ class BookingActivity : AppCompatActivity() {
         val timeTextView = findViewById<TextView>(R.id.textView8)
         val descriptionTextView = findViewById<TextView>(R.id.textView6)
         val priceTextView = findViewById<TextView>(R.id.textView10)
-        val pricing_detailsTextView = findViewById<TextView>(R.id.textView12)
+        val pricingdetailsTextView = findViewById<TextView>(R.id.textView12)
         val imageView = findViewById<ImageView>(R.id.burger)
         val imageUrl: String? = event?.img
 
@@ -39,10 +39,7 @@ class BookingActivity : AppCompatActivity() {
             priceTextView.text = it.price.toString()
             placeTextView.text = it.location
             timeTextView.text = it.date
-
-
-
-
+            pricingdetailsTextView.text = it.pricingdetails
 
         }
 

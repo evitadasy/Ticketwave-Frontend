@@ -27,7 +27,9 @@ data class Event(
     @SerializedName("type")
     val type: String?,
     @SerializedName("category")
-    val category: String?
+    val category: String?,
+    @SerializedName("pricingdetails")
+    val pricingdetails: String?,
 
 ): Parcelable {
     constructor(parcel: Parcel) : this(
@@ -41,7 +43,8 @@ data class Event(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readString(),
     ) {
     }
 
@@ -57,6 +60,7 @@ data class Event(
         parcel.writeString(title)
         parcel.writeString(type)
         parcel.writeString(category)
+        parcel.writeString(pricingdetails)
     }
 
     override fun describeContents(): Int {
