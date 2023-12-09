@@ -49,19 +49,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="21dp"
                 android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="15dp">
 
                 <ImageView
                     android:id="@+id/imageView10"
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/location_gray" />
+                    android:src="@drawable/location_gray"
+                    android:layout_marginRight="10dp" />
 
                 <TextView
                     android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:text="Event Place"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -72,13 +72,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="15dp">
 
                 <ImageView
                     android:id="@+id/imageView5"
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/calendar_gray" />
+                    android:src="@drawable/calendar_gray"
+                    android:layout_marginRight="10dp" />
 
 
 
@@ -102,7 +103,8 @@
                     android:id="@+id/imageView9"
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/clock_gray" />
+                    android:src="@drawable/clock_gray"
+                    android:layout_marginRight="10dp" />
 
 
 

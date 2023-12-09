@@ -16,7 +16,7 @@ import android.database.MatrixCursor
 import android.provider.BaseColumns
 import android.widget.Toast
 import com.example.bookify_frontend.model.City
-import com.example.bookify_frontend.model.SuggestionsAdapter
+import com.example.bookify_frontend.ui.home.SuggestionsAdapter
 import com.example.bookify_frontend.ui.category.CategoryActivity
 
 

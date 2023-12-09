@@ -1,4 +1,4 @@
-package com.example.bookify_frontend.model
+package com.example.bookify_frontend.ui.home
 
 
 import android.content.Context
