@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookify_frontend.R
-import com.example.bookify_frontend.api_service.ApiService
 import com.example.bookify_frontend.api_service.RetrofitService
 import com.example.bookify_frontend.ui.booking.BookingActivity
 import com.example.testing.CategoryAdapter
@@ -15,8 +14,6 @@ import com.example.testing.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Locale
 
 class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListener {
@@ -30,18 +27,23 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-        // Get the selected category position from intent
+        // Get the selected category position and city position from intent
         val categoryPosition = intent.getIntExtra("CATEGORY_POSITION", -1)
+        val cityPosition = intent.getIntExtra("CITY_POSITION", -1)
 
         if (categoryPosition != -1) {
             // Make an API call to fetch data for the selected category
             fetchDataForCategory(categoryPosition)
+        } else if (cityPosition != -1) {
+            // Make an API call to fetch data for the selected city
+            fetchDataForCity(cityPosition)
         } else {
-//            if (cityPosition!=-1) fetchDataForCity(cityPosition)
+            // Handle the case where neither category nor city position is provided
+            Toast.makeText(this, "Invalid selection", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun fetchDataForCity(cityPosition: Int){
+    private fun fetchDataForCity(cityPosition: Int) {
         val apiService = RetrofitService.createApiService()
 
         val selectedCity = when (cityPosition) {
@@ -50,7 +52,7 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             2 -> "Patra"
             3 -> "Katerini"
             4 -> "Volos"
-            else ->  "Heraklion"
+            else -> "Heraklion"
         }
 
         val eventsByCityCall = apiService.getEventsByCity(selectedCity)
@@ -58,18 +60,25 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
         eventsByCityCall.enqueue(object : Callback<List<Event>?> {
             override fun onResponse(
                 call: Call<List<Event>?>,
-                response: Response<List<Event>?>) {
-                TODO("Not yet implemented")
-                //PANAGIOTIS CALL
+                response: Response<List<Event>?>
+            ) {
+                val eventsResponse = response.body()
+
+                if (eventsResponse != null) {
+                    val recyclerView: RecyclerView = findViewById(R.id.categoryRecyclerView)
+                    recyclerView.layoutManager = LinearLayoutManager(this@CategoryActivity)
+                    categoryAdapter = CategoryAdapter(eventsResponse, this@CategoryActivity)
+                    recyclerView.adapter = categoryAdapter
+
+                    categoryAdapter.notifyDataSetChanged()
+                }
             }
 
             override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
-                TODO("Not yet implemented")
+                // Handle failure
+                Toast.makeText(this@CategoryActivity, "Failed to fetch events", Toast.LENGTH_SHORT).show()
             }
         })
-
-
-
     }
 
     private fun fetchDataForCategory(categoryPosition: Int) {
@@ -108,7 +117,6 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             override fun onFailure(call: Call<List<Event>?>, t: Throwable) {
                 // Handle failure
             }
-
         })
     }
 
@@ -117,16 +125,7 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
         // Create an Intent to start the BookingActivity
         val intent = Intent(this@CategoryActivity, BookingActivity::class.java)
 
-//        // Pass data to BookingActivity using Intent extras
-//        intent.putExtra("EVENT_TITLE", event.title)
-//        intent.putExtra("EVENT_DATE", event.date)
-//        intent.putExtra("EVENT_CITY", event.city)
-//        intent.putExtra("EVENT_DESCRIPTION",event.description)
-//        intent.putExtra("PRICE",event.price)
-//        intent.putExtra("EVENT_IMAGE",event.img)
-
         intent.putExtra("Event", event)
-
 
         // Start the BookingActivity
         startActivity(intent)

@@ -78,7 +78,10 @@ class HomeActivity : AppCompatActivity() {
             this,
             createCursor(searchSuggestions),
             false
-        )
+        ) { selectedSuggestion ->
+            handleSuggestionClick(selectedSuggestion)
+        }
+
         searchView.suggestionsAdapter = suggestionAdapter
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -101,7 +104,17 @@ class HomeActivity : AppCompatActivity() {
             }
         })
     }
+    private fun handleSuggestionClick(selectedSuggestion: String) {
+        val selectedCityPosition = searchSuggestions.indexOf(selectedSuggestion)
 
+        if (selectedCityPosition != -1) {
+            val intent = Intent(this, CategoryActivity::class.java)
+            intent.putExtra("CITY_POSITION", selectedCityPosition)
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "Invalid city selection", Toast.LENGTH_SHORT).show()
+        }
+    }
     private fun createCursor(suggestions: List<String>): MatrixCursor {
         val cursor = MatrixCursor(arrayOf(BaseColumns._ID, "suggestion"))
         for ((index, suggestion) in suggestions.withIndex()) {

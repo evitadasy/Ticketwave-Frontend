@@ -15,7 +15,8 @@ import com.example.bookify_frontend.R
 class SuggestionsAdapter(
     context: Context,
     cursor: Cursor,
-    autoRequery: Boolean
+    autoRequery: Boolean,
+    private val clickListener: (String) -> Unit
 ) : CursorAdapter(context, cursor, autoRequery) {
 
     override fun newView(context: Context?, cursor: Cursor?, parent: ViewGroup?): View {
@@ -26,12 +27,14 @@ class SuggestionsAdapter(
         if (view != null && cursor != null) {
             val suggestionTextView: TextView = view.findViewById(R.id.suggestionTextView)
 
-
             val suggestion = cursor.getString(cursor.getColumnIndexOrThrow("suggestion"))
-
 
             suggestionTextView.text = suggestion
 
+            // Set a click listener for each suggestion item
+            view.setOnClickListener {
+                clickListener(suggestion)
+            }
         }
     }
 }
