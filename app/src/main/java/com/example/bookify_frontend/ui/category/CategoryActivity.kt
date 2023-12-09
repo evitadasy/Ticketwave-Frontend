@@ -94,7 +94,8 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
                     categoryAdapter = CategoryAdapter(eventsResponse, this@CategoryActivity)
                     recyclerView.adapter = categoryAdapter
 
-                    categoryAdapter.notifyDataSetChanged()
+                    // Shuffle the data within the adapter
+                    categoryAdapter.shuffleData()
                 }
             }
 
@@ -143,7 +144,8 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
                     categoryAdapter = CategoryAdapter(eventsResponse, this@CategoryActivity)
                     recyclerView.adapter = categoryAdapter
 
-                    categoryAdapter.notifyDataSetChanged()
+                    // Shuffle the data within the adapter
+                    categoryAdapter.shuffleData()
                 }
             }
 

@@ -17,13 +17,17 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 
-class CategoryAdapter(private val itemList: List<Event>, private val onItemClickListener: OnItemClickListener) :
+class CategoryAdapter(private var itemList: List<Event>, private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_category, parent, false)
         return CategoryViewHolder(itemView)
+    }
+    fun shuffleData() {
+        itemList = itemList.toMutableList().apply { shuffle() }
+        notifyDataSetChanged()
     }
 
 
