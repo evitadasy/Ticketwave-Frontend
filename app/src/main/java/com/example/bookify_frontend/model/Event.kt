@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Event(
     @SerializedName("_id")
-    val _id: String?,
+    val id: String?,
     @SerializedName("city")
     val city: String?,
     @SerializedName("date")
@@ -49,7 +49,7 @@ data class Event(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(_id)
+        parcel.writeString(id)
         parcel.writeString(city)
         parcel.writeString(date)
         parcel.writeString(description)

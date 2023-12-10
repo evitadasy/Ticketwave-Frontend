@@ -10,11 +10,17 @@ import com.example.bookify_frontend.ui.confirmation.ConfirmationActivity
 import com.example.testing.Event
 import com.squareup.picasso.Picasso
 import android.content.Intent
+import android.widget.Toast
+import com.example.bookify_frontend.api_service.RetrofitService
+import com.example.bookify_frontend.model.Booking
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.TimeZone
 
 
+@Suppress("DEPRECATION")
 class BookingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +75,46 @@ class BookingActivity : AppCompatActivity() {
 
             // Set a click listener for the button
             bookNowButton.setOnClickListener {
-                // Create an Intent to start the ConfirmationActivity
-                val intent = Intent(this, ConfirmationActivity::class.java)
-
-                // Start the ConfirmationActivity
-                startActivity(intent)
+                postBooking()
             }
         }
+
+    private fun postBooking() {
+        val event = intent.getParcelableExtra<Event>("Event")
+
+        // Check if event is not null before proceeding
+        if (event != null) {
+            val booking = Booking(event.id, 1)
+
+            val apiService = RetrofitService.createApiService()
+
+            // Call the ApiService to post a booking
+            val call: Call<Void> = apiService.postBooking(event.id, booking)
+
+            call.enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    // Handle success
+                    if (response.isSuccessful) {
+                        startConfirmationActivity()
+                    } else {
+                        // Handle error
+                        Toast.makeText(applicationContext, "Booking failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    // Handle failure
+                    Toast.makeText(applicationContext, "Failure", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     }
+
+    private fun startConfirmationActivity() {
+        // Create an Intent to start the ConfirmationActivity
+        val intent = Intent(this, ConfirmationActivity::class.java)
+
+        // Start the ConfirmationActivity
+        startActivity(intent)
+    }
+}
