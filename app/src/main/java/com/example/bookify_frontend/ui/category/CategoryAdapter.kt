@@ -83,7 +83,7 @@ class CategoryAdapter(private var itemList: List<Event>, private val onItemClick
 
         val titleTextView: TextView = itemView.findViewById(R.id.categoryTitle)
         val day: TextView = itemView.findViewById(R.id.day)
-        val place: TextView = itemView.findViewById(R.id.city)
+        val place: TextView = itemView.findViewById(R.id.location)
         val hour: TextView = itemView.findViewById(R.id.hour)
 
     }

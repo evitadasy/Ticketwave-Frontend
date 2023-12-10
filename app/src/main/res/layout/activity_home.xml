@@ -29,8 +29,9 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_searchview_background"
         android:iconifiedByDefault="false"
-        android:background="@drawable/rounded_searchview_background" />
+        android:outlineAmbientShadowColor="#D5C4C4" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

@@ -16,8 +16,11 @@ import com.example.bookify_frontend.model.Booking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.Date
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 @Suppress("DEPRECATION")
@@ -27,39 +30,41 @@ class BookingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_booking)
 
         val event = intent.getParcelableExtra<Event>("Event")
-        val titleTextView = findViewById<TextView>(R.id.textView3)
-        val dateTextView = findViewById<TextView>(R.id.textView7)
-        val cityTextView = findViewById<TextView>(R.id.textView9)
-        val placeTextView = findViewById<TextView>(R.id.textView2)
-        val timeTextView = findViewById<TextView>(R.id.textView8)
-        val descriptionTextView = findViewById<TextView>(R.id.textView6)
-        val priceTextView = findViewById<TextView>(R.id.textView10)
-        val pricingdetailsTextView = findViewById<TextView>(R.id.textView12)
-        val imageView = findViewById<ImageView>(R.id.burger)
+        val titleTextView = findViewById<TextView>(R.id.event_title)
+        val dateTextView = findViewById<TextView>(R.id.day)
+        val locationTextView = findViewById<TextView>(R.id.location)
+        val timeTextView = findViewById<TextView>(R.id.hour)
+        val descriptionTextView = findViewById<TextView>(R.id.details_text)
+        val priceTextView = findViewById<TextView>(R.id.price)
+        val pricingdetailsTextView = findViewById<TextView>(R.id.pricing_text)
+        val imageView = findViewById<ImageView>(R.id.eventImg)
         val imageUrl: String? = event?.img
-
 
 
         event?.let {
             titleTextView.text = it.title
-            cityTextView.text = it.city
             descriptionTextView.text = it.description
-            priceTextView.text = it.price.toString()
-            placeTextView.text = it.location
+            val priceValue = it.price.toString()
+            priceTextView.text = "Ticket costs "+priceValue+"€"
+            locationTextView.text = it.location +", "+ it.city
             pricingdetailsTextView.text = it.pricingdetails
 
-            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-            val outputDateFormat = SimpleDateFormat("yyyy-MM-dd")
-            val outputTimeFormat = SimpleDateFormat("HH:mm:ss")
+            //Format Date
+            // Parse the input date string
+            val instant = Instant.parse(it.date)
+            val localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of("UTC"))
 
-            val date: Date? = inputFormat.parse(it.date)
+            // Format for the hourText (e.g., 5pm/3am)
+            val hourFormatter = DateTimeFormatter.ofPattern("ha", Locale.UK)
+            val formattedHour = localDateTime.format(hourFormatter)
 
-            val formattedDate: String = date?.let { outputDateFormat.format(it) } ?: ""
-            val formattedTime: String = date?.let { outputTimeFormat.format(it) } ?: ""
+            // Format for the dayText (e.g., 12 Mar 2023)
+            val dayFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.UK)
+            val formattedDay = localDateTime.format(dayFormatter)
 
-            dateTextView.text = formattedDate
 
-            timeTextView.text = formattedTime
+            dateTextView.text = formattedDay
+            timeTextView.text = formattedHour
         }
 
         Picasso.get()
@@ -71,7 +76,7 @@ class BookingActivity : AppCompatActivity() {
 
 
             // Find the "Book Now" button in the layout
-            val bookNowButton: Button = findViewById(R.id.button3)
+            val bookNowButton: Button = findViewById(R.id.bookBtn)
 
             // Set a click listener for the button
             bookNowButton.setOnClickListener {
