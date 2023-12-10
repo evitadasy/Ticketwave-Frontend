@@ -153,7 +153,7 @@ class CategoryActivity : AppCompatActivity(), CategoryAdapter.OnItemClickListene
             4 -> "seminar"
             5 -> "theatre"
             6 -> "kids"
-            else -> "museums"
+            else -> "museum"
         }
 
         val eventsByTypeCall =

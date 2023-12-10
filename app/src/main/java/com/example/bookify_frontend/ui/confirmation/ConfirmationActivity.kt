@@ -18,10 +18,6 @@ class ConfirmationActivity : AppCompatActivity() {
             navigateToHomeActivity()
         }
 
-        val btnContinue: Button = findViewById(R.id.btnContinue)
-        btnContinue.setOnClickListener {
-            navigateToCategoryActivity()
-        }
     }
 
     private fun navigateToHomeActivity() {
@@ -30,9 +26,4 @@ class ConfirmationActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun navigateToCategoryActivity() {
-        val intent = Intent(this, CategoryActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 }

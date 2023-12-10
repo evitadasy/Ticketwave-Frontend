@@ -68,11 +68,7 @@ class CategoryAdapter(private var itemList: List<Event>, private val onItemClick
         holder.itemView.setOnClickListener {
             onItemClickListener.onItemClick(currentItem)
         }
-
-
     }
-
-
 
     override fun getItemCount(): Int {
         return itemList.size
