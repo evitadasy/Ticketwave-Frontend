@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/eventImg"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="304dp"
         android:layout_marginBottom="15dp"
         android:scaleType="fitXY"
         android:src="@drawable/burger" />
