@@ -1,6 +1,6 @@
 # Ticketwave (or Bookify) Frontend
 
-![Ticketwave Logo](link/to/logo.png)
+![Ticketwave Logo](screens/logo.png)
 
 Welcome to Ticketwave (or Bookify) - Your Ultimate Event Experience!
 
@@ -18,7 +18,7 @@ Welcome to Ticketwave (or Bookify) - Your Ultimate Event Experience!
 
 ## Introduction 
 
-which was created as part of the course "Apps development for Mobile Devices" (University of Macedonia - Applied Informatics, academic year 2021-2022, 6th semester).</h4>
+Ticketwave (or Bookify) is an innovative event app that aims to revolutionize the way users discover, book, and experience events. With a user-friendly interface and powerful features, our app provides a seamless event management and attendance experience.This app was created as part of a seminar, skg.code 2023. 
 
 ## Contributors
 
@@ -41,14 +41,13 @@ To get started with Ticketwave (or Bookify), follow these steps:
 3. Run the app locally or deploy it to a hosting service.
 
 ## Screenshots
-
-<h2>R1 &nbsp;&nbsp; Display matches - Admin Login - Guest Starting Page</h2>
 <div float="left">
-  <img src="screenshots/R1/start-page.png" height="450" />
-  <img src="screenshots/R1/admin-login.png" height="450" />
-  <img src="screenshots/R1/upcoming-matches-admin-view-before-start.png" height="450" />
+  <img src="screens/splashscreen.png"/>
+  <img src="screens/homepage.png"/>
+  <img src="screens/sportswave.png"/>
+  <img src="screens/sport-book.png"/>
+  <img src="screens/book-confirm.png"/>
 </div>
-<br>
 
 # Installation
 <h4>For the correct use of the application, the following actions are required:</h4>
@@ -60,9 +59,9 @@ If does not work, follow installation instructions on github repo of backend -> 
 Then:
 git clone https://github.com/uom-android-team2/WeBall_Statistics-Backend.git or download the zip from github and extract it
 Open Android Studio and the app root folder.
-Start any emulator, and then you are ready to launch the app!
+Start any emulator (Pixel 7 API 30), and then you are ready to launch the app!
 ```
 
 ## Technologies Used
 * 100% Kotlin
-* for Backend (Node.js, Express.js, MongoDB Atlas)
+* Backend (Node.js, Express.js, MongoDB Atlas)
