@@ -1,6 +1,7 @@
 # Ticketwave (or Bookify) Frontend
 
-![Ticketwave Logo](screens/logo.png)
+
+<img float="left" src="screens/logo.png" height=150/>
 
 Welcome to Ticketwave (or Bookify) - Your Ultimate Event Experience!
 
@@ -42,11 +43,11 @@ To get started with Ticketwave (or Bookify), follow these steps:
 
 ## Screenshots
 <div float="left">
-  <img src="screens/splashscreen.png"/>
-  <img src="screens/homepage.png"/>
-  <img src="screens/sportswave.png"/>
-  <img src="screens/sport-book.png"/>
-  <img src="screens/book-confirm.png"/>
+  <img src="screens/splashscreen.png" height=400/>
+  <img src="screens/homepage.png" height=400/>
+  <img src="screens/sportswave.png" height=400/>
+  <img src="screens/sport-book.png" height=400/>
+  <img src="screens/book-confirm.png" height=400/>
 </div>
 
 # Installation
